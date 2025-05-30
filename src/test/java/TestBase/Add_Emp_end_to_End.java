@@ -13,6 +13,9 @@ import PageObjects.Add_Employees;
 import PageObjects.loginpage;
 import junit.framework.Assert;
 
+
+
+
 public class Add_Emp_end_to_End {
 
 	
@@ -24,6 +27,7 @@ public class Add_Emp_end_to_End {
 		driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		loginpage lp=new loginpage(driver);
+		
 	lp.SetEmail("Admin");
 	lp.SetPassword("admin123");
 	lp.clicklogin();
@@ -54,6 +58,7 @@ public class Add_Emp_end_to_End {
 	ade.lastname("yyy");
 	ade.employeeid("150");
 	ade.Savebutton();
+	
 
 	//employee 4
 	Add_Employees ade4=new Add_Employees(driver);
@@ -65,17 +70,33 @@ public class Add_Emp_end_to_End {
 	ade.empoyeelist();
 	
 	
+	
 	List<WebElement> Emplist=driver.findElements(By.xpath("//div[@class='oxd-table-card-cell']//div[@class='data']"));
-	for (WebElement element : Emplist) {
-		
-		String employeename=element.getText();
-		if(employeename.contains("122"))
-		{
-			System.out.println(employeename);
-			Assert.assertTrue(true);
-		}
-		
+//	for (WebElement element : Emplist) {
+//		
+//		String employeename=element.getText();
+//		System.out.println(employeename);
+//		if(employeename.contains("122"))
+//		{
+//			System.out.println(employeename);
+//			Assert.assertTrue(false);
+//		}
+//		
+//	}
+	
+	for(int i=0;i<Emplist.size();i++)
+	{
+		WebElement employee=Emplist.get(i);
+		String empname=employee.getText();
+		System.out.println(empname);
 	}
+	
+	
+	
+	lp.clickLogout();
+	driver.quit();
+	
+	
 	
 	
 	
